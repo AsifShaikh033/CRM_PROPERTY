@@ -9,7 +9,7 @@
             >
               <div>
                 <h3 class="fw-bold mb-3">Dashboard</h3>
-                <h6 class="op-7 mb-2">Free mvpay</h6>
+                <h6 class="op-7 mb-2">Welcome back, Admin!</h6>
               </div>
               <div class="ms-md-auto py-2 py-md-0">
                 <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
@@ -30,8 +30,8 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category">Users</p>
-                          <h4 class="card-title">{{$user_count}}</h4>
+                          <p class="card-category">totalProperties</p>
+                          <h4 class="card-title">{{$dashboardData['totalProperties']}}</h4>
                         </div>
                       </div>
                     </div>
@@ -51,8 +51,8 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category">Subscribers</p>
-                          <h4 class="card-title">1303</h4>
+                          <p class="card-category">activeProperties</p>
+                          <h4 class="card-title">{{$dashboardData['activeProperties']}}</h4>
                         </div>
                       </div>
                     </div>
@@ -72,8 +72,8 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category">Sales</p>
-                          <h4 class="card-title">$ 1,345</h4>
+                          <p class="card-category">totalTenants</p>
+                          <h4 class="card-title">{{$dashboardData['totalTenants']}}</h4>
                         </div>
                       </div>
                     </div>
@@ -93,8 +93,8 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category">Order</p>
-                          <h4 class="card-title">576</h4>
+                          <p class="card-category">monthlyCollected</p>
+                          <h4 class="card-title">{{$dashboardData['monthlyCollected']}}</h4>
                         </div>
                       </div>
                     </div>
@@ -134,7 +134,7 @@
                       </div>
                     </div>
                     <div class="card-list py-4">
-                    @foreach($latestUsers as $user)
+                    @foreach($dashboardData['latestUsers'] as $user)
                         <div class="item-list">
                             <div class="avatar">
                                 <img
@@ -204,7 +204,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                        @foreach($latestTransactions as $transaction)
+                        @foreach($dashboardData['latestTransactions'] as $transaction)
                                 <tr>
                                     <th scope="row">
                                         <button

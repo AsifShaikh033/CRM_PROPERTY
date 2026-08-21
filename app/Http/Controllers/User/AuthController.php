@@ -15,19 +15,15 @@ class AuthController extends Controller
 {
     public function showRegistrationForm()
     {
-        if (Auth::check()) {
-            return redirect()->route('index'); 
-        }
-    
-        return view('Web.Auth.register');
+        
+            return redirect()->route('admin.login'); 
+
     }
 
     public function showLoginForm()
     {
-        if (Auth::check()) {
-            return redirect()->route('index'); 
-        }
-        return view('Web.Auth.login');
+    return redirect()->route('admin.login'); 
+
     }
 
     public function loginuser_auth(Request $request)
