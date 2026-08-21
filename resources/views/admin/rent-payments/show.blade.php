@@ -1,0 +1,1 @@
+@extends('layouts.admin.app') @section('title','Rent Payments Details') @section('content')<h1 class="page-title mb-4">Rent Payments Details</h1><div class="card p-4"><pre>{json_encode($item->toArray(),JSON_PRETTY_PRINT)}</pre></div>@endsection

@@ -1,0 +1,504 @@
+/* =====================================================
+   SERVICES PAGE
+===================================================== */
+
+.services-page-banner {
+
+    padding: 75px 0;
+    background:
+
+        radial-gradient(
+            circle at 80% 30%,
+            rgba(227, 75, 145, 0.15),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            120deg,
+            #fff9fc,
+            var(--light-pink)
+        );
+}
+
+
+.services-page-banner h1 {
+
+    color: var(--primary-dark);
+    font-size: clamp(40px, 5vw, 58px);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 15px;
+}
+
+
+.services-page-banner h1 span {
+    color: var(--primary-color);
+}
+
+
+.services-page-banner p {
+    max-width: 700px;
+    margin: 0 auto 20px;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+
+/* =====================================================
+   BREADCRUMB
+===================================================== */
+
+.breadcrumb-custom {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+
+.breadcrumb-custom a {
+
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+
+.breadcrumb-custom span {
+
+    color: var(--text-color);
+}
+
+
+.breadcrumb-custom i {
+
+    color: var(--primary-color);
+}
+
+
+
+/* =====================================================
+   MAIN SERVICES SECTION
+===================================================== */
+
+.services-main-section {
+
+    background: var(--very-light-pink);
+}
+
+
+
+/* =====================================================
+   SERVICE CARD
+===================================================== */
+
+.service-large-card {
+
+    position: relative;
+    height: 100%;
+    padding: 35px;
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+
+/* Bottom decorative circle */
+
+.service-large-card::after {
+
+    content: "";
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    right: -60px;
+    bottom: -60px;
+    border-radius: 50%;
+    background: rgba(227, 75, 145, 0.06);
+    pointer-events: none;
+}
+
+
+.service-large-card:hover {
+
+    transform: translateY(-8px);
+    box-shadow: var(--shadow);
+    border-color: var(--secondary-color);
+}
+
+
+
+/* =====================================================
+   IMAGE + NUMBER AREA
+===================================================== */
+
+.service-card-top {
+
+    position: relative;
+    margin-bottom: 25px;
+}
+
+
+
+/* =====================================================
+   SERVICE IMAGE
+===================================================== */
+
+.service-card-image {
+
+    width: 100%;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+
+
+/* Actual image */
+
+.service-card-image img {
+
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+
+
+/* Fallback image */
+
+.service-card-placeholder {
+
+    background: #fff0f6;
+    color: var(--primary-color);
+    font-size: 45px;
+}
+
+
+
+/* =====================================================
+   SERVICE NUMBER
+===================================================== */
+
+.service-number {
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    color: rgba(116, 20, 63, 0.15);
+    font-size: 35px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+
+
+/* =====================================================
+   SERVICE TITLE
+===================================================== */
+
+.service-large-card h3 {
+
+    position: relative;
+    z-index: 1;
+    color: var(--primary-dark);
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 12px;
+}
+
+
+
+/* =====================================================
+   SERVICE DESCRIPTION
+===================================================== */
+
+.service-large-card p {
+
+    position: relative;
+    z-index: 1;
+    color: var(--text-color);
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+
+
+/* =====================================================
+   SERVICE LINK
+===================================================== */
+
+.service-card-link {
+
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+
+.service-card-link:hover {
+
+    color: var(--primary-dark);
+}
+
+
+.service-card-link i {
+
+    margin-left: 6px;
+    transition: 0.3s;
+}
+
+
+.service-card-link:hover i {
+
+    transform: translateX(4px);
+}
+
+
+
+/* =====================================================
+   NO SERVICES
+===================================================== */
+
+.no-services {
+
+    text-align: center;
+    padding: 70px 20px;
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+}
+
+
+.no-services-icon {
+
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    background: #ffe5f0;
+    color: var(--primary-color);
+    border-radius: 20px;
+    font-size: 30px;
+}
+
+
+.no-services h4 {
+
+    color: var(--primary-dark);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+
+.no-services p {
+
+    margin: 0;
+    color: var(--text-color);
+}
+
+
+
+/* =====================================================
+   CTA SECTION
+===================================================== */
+
+.services-cta-section {
+    background: var(--white);
+}
+
+
+.services-cta {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 50px;
+    background:
+        linear-gradient(
+            120deg,
+            var(--primary-dark),
+            var(--primary-color)
+        );
+
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+}
+
+
+
+/* CTA CONTENT */
+
+.services-cta-content {
+    max-width: 700px;
+}
+
+
+.services-cta-content h2 {
+
+    color: var(--white);
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+
+.services-cta-content h2 span {
+
+    color: #ffd3e6;
+}
+
+
+.services-cta-content p {
+
+    color: rgba(255,255,255,0.85);
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+
+
+/* CTA BUTTON */
+
+.services-cta-button {
+    flex-shrink: 0;
+}
+
+
+.services-cta-button .btn {
+
+    border-radius: 50px;
+    padding: 14px 25px;
+    font-weight: 700;
+}
+
+
+.services-cta-button .btn i {
+
+    margin-right: 7px;
+}
+
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 991px) {
+
+
+    .services-page-banner {
+        padding: 55px 0;
+
+    }
+    .service-card-image {
+        height: 250px;
+    }
+
+    .services-cta {
+        padding: 40px;
+    }
+
+    .services-cta-content h2 {
+        font-size: 32px;
+    }
+
+}
+
+
+
+@media (max-width: 767px) {
+
+
+    .service-card-image {
+        height: 240px;
+    }
+
+    .services-cta {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 35px;
+    }
+
+
+    .services-cta-content h2 {
+        font-size: 30px;
+    }
+
+}
+
+
+
+@media (max-width: 575px) {
+
+    .services-page-banner h1 {
+        font-size: 38px;
+    }
+
+
+    .services-page-banner p {
+        font-size: 15px;
+    }
+
+
+    .service-large-card {
+        padding: 25px;
+    }
+
+
+    .service-card-image {
+        height: 220px;
+    }
+
+
+    .service-large-card h3 {
+        font-size: 21px;
+    }
+
+
+    .service-large-card p {
+        font-size: 15px;
+    }
+
+
+    .service-number {
+        font-size: 30px;
+    }
+
+
+    .services-cta {
+        padding: 30px 25px;
+        border-radius: 22px;
+    }
+
+
+    .services-cta-content h2 {
+        font-size: 27px;
+    }
+
+}

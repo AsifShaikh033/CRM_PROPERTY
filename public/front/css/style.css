@@ -1,0 +1,949 @@
+/* =====================================================
+   COMMON THEME COLORS
+   CHANGE COLORS ONLY HERE
+===================================================== */
+
+:root {
+
+    --primary-color: #e34b91;
+    --primary-dark: #74143f;
+
+    --secondary-color: #f7b6d2;
+
+    --light-pink: #fff3f8;
+    --very-light-pink: #fff8fb;
+
+    --text-dark: #35152a;
+    --text-color: #665b63;
+
+    --white: #ffffff;
+
+    --border-color: #f1d5e2;
+
+    --shadow: 0 15px 40px rgba(116, 20, 63, 0.10);
+
+}
+
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    background: var(--white);
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+/* =====================================================
+   COMMON BUTTON
+===================================================== */
+
+.btn-primary-custom {
+    background: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    color: var(--white);
+    border-radius: 50px;
+    padding: 12px 24px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-primary-custom:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.top-bar {
+    background: linear-gradient(
+        90deg,
+        var(--primary-dark),
+        var(--primary-color)
+    );
+
+    color: var(--white);
+    padding: 7px 0;
+    font-size: 13px;
+}
+
+.top-bar-content {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 22px;
+}
+
+.top-bar i {
+    margin-right: 4px;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.main-navbar {
+    background: var(--white);
+    min-height: 105px;
+    border-bottom: 1px solid #f5edf1;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.doctor-logo {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--primary-color);
+    font-size: 48px;
+}
+
+.nav-link {
+    color: #222;
+    font-weight: 600;
+    padding: 15px 16px !important;
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-color);
+}
+
+.nav-link.active::after {
+    content: "";
+    position: absolute;
+    bottom: 3px;
+    left: 16px;
+    right: 16px;
+    height: 2px;
+    background: var(--primary-color);
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero-section {
+    position: relative;
+
+    padding: 100px 0 70px;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(227, 75, 145, 0.16),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            120deg,
+            #fff9fc,
+            var(--light-pink)
+        );
+
+    overflow: hidden;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 8px 15px;
+
+    background: #ffe4ef;
+
+    border: 1px solid #f5bfd5;
+
+    color: var(--primary-dark);
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    margin-bottom: 20px;
+}
+
+.hero-title {
+    color: var(--primary-dark);
+
+    font-size: clamp(42px, 5vw, 62px);
+
+    line-height: 1.08;
+
+    font-weight: 800;
+
+    margin-bottom: 20px;
+
+    letter-spacing: -2px;
+}
+
+.hero-title span {
+    display: block;
+}
+
+.hero-description {
+    font-size: 17px;
+    line-height: 1.7;
+
+    max-width: 590px;
+
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.btn-call {
+    background: var(--white);
+    color: var(--primary-dark);
+
+    border: 1px solid #ead9e1;
+
+    border-radius: 50px;
+
+    padding: 12px 25px;
+
+    font-weight: 600;
+}
+
+.btn-call:hover {
+    background: var(--primary-dark);
+    color: var(--white);
+}
+
+
+/* =====================================================
+   HERO STATS
+===================================================== */
+
+.hero-stats {
+    display: flex;
+    gap: 45px;
+
+    margin-top: 35px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-item strong {
+    color: var(--primary-dark);
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.stat-item span {
+    font-size: 12px;
+}
+
+.rating {
+    color: var(--primary-color);
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+
+/* =====================================================
+   HERO IMAGE
+===================================================== */
+
+.hero-image-wrapper {
+    position: relative;
+    padding: 15px;
+}
+
+.doctor-image-box {
+    height: 510px;
+
+    border-radius: 35px;
+
+    overflow: hidden;
+
+    background: #f9d6e5;
+
+    box-shadow: var(--shadow);
+}
+
+.doctor-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* =====================================================
+   APPOINTMENT FLOATING CARD
+===================================================== */
+
+.appointment-card {
+    position: absolute;
+
+    left: -20px;
+    bottom: 60px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    background: var(--white);
+
+    padding: 15px 20px;
+
+    border-radius: 18px;
+
+    box-shadow: 0 15px 35px rgba(116, 20, 63, 0.15);
+
+    z-index: 5;
+}
+
+.appointment-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary-color);
+
+    color: var(--white);
+
+    border-radius: 12px;
+}
+
+.appointment-card strong {
+    display: block;
+    color: var(--primary-dark);
+    font-size: 14px;
+}
+
+.appointment-card small {
+    color: var(--text-color);
+}
+
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+
+.section-padding {
+    padding: 90px 0;
+}
+
+.section-label {
+    color: var(--primary-color);
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 12px;
+}
+
+.section-label.light {
+    color: var(--secondary-color);
+}
+
+.section-title {
+    color: var(--primary-dark);
+
+    font-size: clamp(32px, 4vw, 46px);
+
+    font-weight: 800;
+
+    line-height: 1.2;
+
+    margin-bottom: 20px;
+}
+
+.section-title span {
+    color: var(--primary-color);
+}
+
+.section-heading {
+    max-width: 650px;
+    margin: 0 auto 50px;
+}
+
+
+/* =====================================================
+   ABOUT
+===================================================== */
+
+.about-card {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 18px;
+
+    padding: 25px;
+
+    margin-bottom: 20px;
+
+    border-radius: 20px;
+
+    background: var(--very-light-pink);
+
+    border: 1px solid var(--border-color);
+}
+
+.about-icon {
+    min-width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary-color);
+
+    color: var(--white);
+
+    border-radius: 15px;
+
+    font-size: 24px;
+}
+
+.about-card h4 {
+    color: var(--primary-dark);
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    margin-bottom: 7px;
+}
+
+
+/* =====================================================
+   SERVICES
+===================================================== */
+
+.services-section {
+    background: var(--very-light-pink);
+}
+
+.service-card {
+    height: 100%;
+
+    padding: 30px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 22px;
+
+    transition: 0.3s;
+
+    box-shadow: 0 5px 20px rgba(116, 20, 63, 0.03);
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow: var(--shadow);
+
+    border-color: var(--secondary-color);
+}
+
+.service-icon {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffe5f0;
+
+    color: var(--primary-color);
+
+    border-radius: 18px;
+
+    font-size: 30px;
+
+    margin-bottom: 20px;
+}
+
+.service-card h4 {
+    color: var(--primary-dark);
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    margin-bottom: 12px;
+}
+
+.service-card p {
+    line-height: 1.7;
+}
+
+.service-card a,
+.blog-card a {
+    color: var(--primary-color);
+
+    font-weight: 700;
+}
+
+.service-card a:hover,
+.blog-card a:hover {
+    color: var(--primary-dark);
+}
+
+
+/* =====================================================
+   APPOINTMENT SECTION
+===================================================== */
+
+.appointment-section {
+    padding: 70px 0;
+}
+
+.appointment-box {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    padding: 50px;
+
+    border-radius: 30px;
+
+    background: linear-gradient(
+        100deg,
+        var(--primary-dark),
+        var(--primary-color)
+    );
+
+    color: var(--white);
+}
+
+.appointment-box h2 {
+    font-size: 38px;
+    font-weight: 800;
+}
+
+.appointment-box p {
+    margin-bottom: 0;
+}
+
+
+/* =====================================================
+   BLOG
+===================================================== */
+
+.blog-card {
+    overflow: hidden;
+
+    background: var(--white);
+
+    border-radius: 20px;
+
+    border: 1px solid var(--border-color);
+
+    transition: 0.3s;
+}
+
+.blog-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow: var(--shadow);
+}
+
+.blog-image {
+    height: 230px;
+    overflow: hidden;
+}
+
+.blog-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    transition: 0.4s;
+}
+
+.blog-card:hover img {
+    transform: scale(1.05);
+}
+
+.blog-content {
+    padding: 25px;
+}
+
+.blog-date {
+    color: var(--primary-color);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.blog-content h4 {
+    color: var(--primary-dark);
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    margin: 10px 0;
+}
+
+
+/* =====================================================
+   CONTACT
+===================================================== */
+
+.contact-section {
+    background: var(--very-light-pink);
+}
+
+.contact-item {
+    display: flex;
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+.contact-icon {
+    min-width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary-color);
+
+    color: var(--white);
+
+    border-radius: 12px;
+}
+
+.contact-item strong {
+    color: var(--primary-dark);
+}
+
+.contact-item p {
+    margin: 3px 0 0;
+}
+
+.contact-form {
+    background: var(--white);
+
+    padding: 35px;
+
+    border-radius: 25px;
+
+    box-shadow: var(--shadow);
+}
+
+.contact-form h4 {
+    color: var(--primary-dark);
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    margin-bottom: 25px;
+}
+
+.form-control {
+    border: 1px solid var(--border-color);
+
+    border-radius: 12px;
+
+    padding: 13px 16px;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+
+    box-shadow: 0 0 0 3px rgba(227, 75, 145, 0.12);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+    background: var(--primary-dark);
+
+    color: rgba(255,255,255,0.75);
+
+    padding: 60px 0 20px;
+}
+
+.footer h4,
+.footer h5 {
+    color: var(--white);
+}
+
+.footer h4 {
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.footer h5 {
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+.footer a {
+    display: block;
+
+    color: rgba(255,255,255,0.75);
+
+    margin-bottom: 10px;
+
+    transition: 0.2s;
+}
+
+.footer a:hover {
+    color: var(--secondary-color);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.15);
+
+    margin-top: 35px;
+
+    padding-top: 20px;
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+
+
+/* =====================================================
+   FOOTER SOCIAL LINKS
+===================================================== */
+
+.footer-social-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 15px;
+}
+
+.footer-social-links a {
+    display: flex !important;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 38px;
+
+    height: 38px;
+
+    margin: 0 !important;
+
+    padding: 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.20);
+
+    border-radius: 50%;
+
+    color: var(--white);
+
+    background: rgba(255, 255, 255, 0.08);
+
+    font-size: 16px;
+
+    transition: all 0.3s ease;
+}
+
+.footer-social-links a:hover {
+    background: var(--primary-color);
+
+    border-color: var(--primary-color);
+
+    color: var(--white);
+
+    transform: translateY(-3px);
+}
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+.whatsapp-button {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #25d366;
+
+    color: var(--white);
+
+    border-radius: 50%;
+
+    font-size: 27px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+
+    z-index: 999;
+}
+
+.whatsapp-button:hover {
+    color: var(--white);
+    transform: scale(1.08);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 991px) {
+
+    .top-bar-content {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+    }
+
+    .main-navbar {
+        min-height: 80px;
+    }
+
+    .hero-section {
+        padding: 70px 0;
+    }
+
+    .hero-title {
+        font-size: 45px;
+    }
+
+    .doctor-image-box {
+        height: 450px;
+    }
+
+    .appointment-card {
+        left: 10px;
+    }
+
+    .appointment-box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}
+
+
+@media (max-width: 575px) {
+
+    .top-bar {
+        display: none;
+    }
+
+    .hero-section {
+        padding: 50px 0;
+    }
+
+    .hero-title {
+        font-size: 38px;
+        letter-spacing: -1px;
+    }
+
+    .hero-stats {
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .doctor-image-box {
+        height: 380px;
+    }
+
+    .appointment-card {
+        position: relative;
+
+        left: 0;
+        bottom: 0;
+
+        margin-top: -30px;
+
+        width: 90%;
+    }
+
+    .appointment-box {
+        padding: 35px 25px;
+    }
+
+    .appointment-box h2 {
+        font-size: 30px;
+    }
+
+    .contact-form {
+        padding: 25px;
+    }
+
+}
+
+
