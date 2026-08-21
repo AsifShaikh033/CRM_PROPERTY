@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -7,11 +8,86 @@ use Illuminate\Http\Request;
 
 class OwnerController extends Controller
 {
-    public function index() { $items=Owner::latest()->paginate(15); return view('admin.owners.index',compact('items')); }
-    public function create() { return view('admin.owners.create'); }
-    public function store(Request $request) { Owner::create($request->validate(['name'=>'required|string|max:255','email'=>'nullable|email','phone'=>'nullable|string|max:255','address'=>'nullable|string|max:255','status'=>'required|string|max:50'])); return redirect()->route('admin.owners.index')->with('success','Record created successfully.'); }
-    public function show(Owner $item) { return view('admin.owners.show',compact('item')); }
-    public function edit(Owner $item) { return view('admin.owners.edit',compact('item')); }
-    public function update(Request $request,Owner $item) { $item->update($request->validate(['name'=>'required|string|max:255','email'=>'nullable|email','phone'=>'nullable|string|max:255','address'=>'nullable|string|max:255','status'=>'required|string|max:50'])); return redirect()->route('admin.owners.index')->with('success','Record updated successfully.'); }
-    public function destroy(Owner $item) { $item->delete(); return back()->with('success','Record deleted successfully.'); }
+    public function index()
+    {
+        $items = Owner::latest()->paginate(15);
+
+        return view('admin.owners.index', compact('items'));
+    }
+
+
+    public function create()
+    {
+        return view('admin.owners.create');
+    }
+
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:100',
+            'state' => 'nullable|string|max:100',
+            'country' => 'nullable|string|max:100',
+            'status' => 'required|in:active,inactive',
+            'notes' => 'nullable|string',
+        ]);
+
+        Owner::create($data);
+
+        return redirect()
+            ->route('admin.owners.index')
+            ->with('success', 'Owner created successfully.');
+    }
+
+
+    public function show(Owner $owner)
+    {
+        return view('admin.owners.show', [
+            'item' => $owner
+        ]);
+    }
+
+
+    public function edit(Owner $owner)
+    {
+        return view('admin.owners.edit', [
+            'item' => $owner
+        ]);
+    }
+
+
+    public function update(Request $request, Owner $owner)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:100',
+            'state' => 'nullable|string|max:100',
+            'country' => 'nullable|string|max:100',
+            'status' => 'required|in:active,inactive',
+            'notes' => 'nullable|string',
+        ]);
+
+        $owner->update($data);
+
+        return redirect()
+            ->route('admin.owners.index')
+            ->with('success', 'Owner updated successfully.');
+    }
+
+
+    public function destroy(Owner $owner)
+    {
+        $owner->delete();
+
+        return redirect()
+            ->route('admin.owners.index')
+            ->with('success', 'Owner deleted successfully.');
+    }
 }

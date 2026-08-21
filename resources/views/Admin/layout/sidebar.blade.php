@@ -55,14 +55,14 @@
                <li class="nav-item">  
                         <a data-bs-toggle="collapse" href="#base"  
                         aria-expanded="{{ Request::routeIs('admin.webconfig.edit')
-                         || Request::routeIs('admin.banner.list')
+                         
                          || Request::routeIs('admin.web_config.about_section') ? 'true' : 'false' }}">
                         <i class="fas fa-layer-group"></i>
                         <p>Configuration</p>
                         <span class="caret"></span>
                       </a>
                       <div class="collapse {{ Request::routeIs('admin.webconfig.edit')
-                       || Request::routeIs('admin.banner.list')
+                      
                        || Request::routeIs('admin.web_config.about_section') ? 'show' : '' }}" id="base">
                           <ul class="nav nav-collapse">
                                 <li>
@@ -70,42 +70,13 @@
                                         <span class="sub-item">Web Configuration</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="{{ route('admin.banner.list') }}" class="{{ Request::routeIs('admin.banner.list') ? 'active' : '' }}">
-                                        <span class="sub-item">Banner Section</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('admin.web_config.about_section') }}" class="{{ Request::routeIs('admin.web_config.about_section') ? 'active' : '' }}">
-                                        <span class="sub-item">About Section</span>
-                                    </a>
-                                </li>
+                               
                             </ul>
                       </div>
                 </li>
 
-              <li class="nav-item {{ Request::routeIs('admin.service.list', 'admin.editService', 'admin.updateService') ? 'active' : '' }}">
-
-                    <a href="{{ route('admin.service.list') }}">
-
-                        <i class="fas fa-cogs"></i>
-
-                        <p>Services</p>
-
-                    </a>
-
-                </li>
-                <li class="nav-item">
-                    <a
-                        href="{{ route('admin.blog.list') }}"
-                        class="{{ Request::routeIs('admin.blog.*') ? 'active' : '' }}">
-                        <i class="fa fa-newspaper"></i>
-                        <p>
-                            Blogs
-                        </p>
-                    </a>
-                </li>
-
+            
+             
                 <li class="nav-item {{ Request::routeIs('admin.user.list') ? 'active' : '' }}">
                     <a href="{{ route('admin.user.list') }}" 
                      >

@@ -1,17 +1,101 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Expense;
+use App\Models\Property;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
 {
-    public function index() { $items=Expense::latest()->paginate(15); return view('admin.expenses.index',compact('items')); }
-    public function create() { return view('admin.expenses.create'); }
-    public function store(Request $request) { Expense::create($request->validate(['property_id'=>'nullable|integer','title'=>'required|string|max:255','amount'=>'required|numeric|min:0','expense_date'=>'required|date','status'=>'required|string|max:50','description'=>'nullable|string|max:255'])); return redirect()->route('admin.expenses.index')->with('success','Record created successfully.'); }
-    public function show(Expense $item) { return view('admin.expenses.show',compact('item')); }
-    public function edit(Expense $item) { return view('admin.expenses.edit',compact('item')); }
-    public function update(Request $request,Expense $item) { $item->update($request->validate(['property_id'=>'nullable|integer','title'=>'required|string|max:255','amount'=>'required|numeric|min:0','expense_date'=>'required|date','status'=>'required|string|max:50','description'=>'nullable|string|max:255'])); return redirect()->route('admin.expenses.index')->with('success','Record updated successfully.'); }
-    public function destroy(Expense $item) { $item->delete(); return back()->with('success','Record deleted successfully.'); }
+    public function index()
+    {
+        $items = Expense::with('property')
+            ->latest()
+            ->paginate(15);
+
+        return view('admin.expenses.index', compact('items'));
+    }
+
+
+    public function create()
+    {
+        $properties = Property::where('status', 'active')
+            ->orderBy('name')
+            ->get();
+
+        return view('admin.expenses.create', compact('properties'));
+    }
+
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'property_id' => 'nullable|exists:properties,id',
+            'title' => 'required|string|max:255',
+            'amount' => 'required|numeric|min:0',
+            'expense_date' => 'required|date',
+            'status' => 'required|in:pending,paid,cancelled',
+            'description' => 'nullable|string|max:1000',
+        ]);
+
+        Expense::create($data);
+
+        return redirect()
+            ->route('admin.expenses.index')
+            ->with('success', 'Expense created successfully.');
+    }
+
+
+    public function show(Expense $expense)
+    {
+        $expense->load('property');
+
+        return view('admin.expenses.show', [
+            'item' => $expense
+        ]);
+    }
+
+
+    public function edit(Expense $expense)
+    {
+        $properties = Property::where('status', 'active')
+            ->orderBy('name')
+            ->get();
+
+        return view('admin.expenses.edit', [
+            'item' => $expense,
+            'properties' => $properties,
+        ]);
+    }
+
+
+    public function update(Request $request, Expense $expense)
+    {
+        $data = $request->validate([
+            'property_id' => 'nullable|exists:properties,id',
+            'title' => 'required|string|max:255',
+            'amount' => 'required|numeric|min:0',
+            'expense_date' => 'required|date',
+            'status' => 'required|in:pending,paid,cancelled',
+            'description' => 'nullable|string|max:1000',
+        ]);
+
+        $expense->update($data);
+
+        return redirect()
+            ->route('admin.expenses.index')
+            ->with('success', 'Expense updated successfully.');
+    }
+
+
+    public function destroy(Expense $expense)
+    {
+        $expense->delete();
+
+        return redirect()
+            ->route('admin.expenses.index')
+            ->with('success', 'Expense deleted successfully.');
+    }
 }

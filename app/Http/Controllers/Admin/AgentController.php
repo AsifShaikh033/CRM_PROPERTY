@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -7,11 +8,76 @@ use Illuminate\Http\Request;
 
 class AgentController extends Controller
 {
-    public function index() { $items=Agent::latest()->paginate(15); return view('admin.agents.index',compact('items')); }
-    public function create() { return view('admin.agents.create'); }
-    public function store(Request $request) { Agent::create($request->validate(['name'=>'required|string|max:255','email'=>'nullable|email','phone'=>'nullable|string|max:255','status'=>'required|string|max:50'])); return redirect()->route('admin.agents.index')->with('success','Record created successfully.'); }
-    public function show(Agent $item) { return view('admin.agents.show',compact('item')); }
-    public function edit(Agent $item) { return view('admin.agents.edit',compact('item')); }
-    public function update(Request $request,Agent $item) { $item->update($request->validate(['name'=>'required|string|max:255','email'=>'nullable|email','phone'=>'nullable|string|max:255','status'=>'required|string|max:50'])); return redirect()->route('admin.agents.index')->with('success','Record updated successfully.'); }
-    public function destroy(Agent $item) { $item->delete(); return back()->with('success','Record deleted successfully.'); }
+    public function index()
+    {
+        $items = Agent::latest()->paginate(15);
+
+        return view('admin.agents.index', compact('items'));
+    }
+
+
+    public function create()
+    {
+        return view('admin.agents.create');
+    }
+
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:255',
+            'status' => 'required|in:active,inactive',
+        ]);
+
+        Agent::create($data);
+
+        return redirect()
+            ->route('admin.agents.index')
+            ->with('success', 'Agent created successfully.');
+    }
+
+
+    public function show(Agent $agent)
+    {
+        return view('admin.agents.show', [
+            'item' => $agent
+        ]);
+    }
+
+
+    public function edit(Agent $agent)
+    {
+        return view('admin.agents.edit', [
+            'item' => $agent
+        ]);
+    }
+
+
+    public function update(Request $request, Agent $agent)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:255',
+            'status' => 'required|in:active,inactive',
+        ]);
+
+        $agent->update($data);
+
+        return redirect()
+            ->route('admin.agents.index')
+            ->with('success', 'Agent updated successfully.');
+    }
+
+
+    public function destroy(Agent $agent)
+    {
+        $agent->delete();
+
+        return redirect()
+            ->route('admin.agents.index')
+            ->with('success', 'Agent deleted successfully.');
+    }
 }

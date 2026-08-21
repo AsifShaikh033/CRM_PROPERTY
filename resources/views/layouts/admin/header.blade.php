@@ -1,1 +1,0 @@
-<header class="topbar"><button class="btn btn-light d-lg-none" id="sidebarToggle">☰</button><div></div><div><span class="text-muted">Administrator</span> <strong>Admin</strong></div></header>

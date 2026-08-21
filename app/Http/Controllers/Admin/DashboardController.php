@@ -1,23 +1,19 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Property;
-use App\Models\Tenant;
-use App\Models\RentPayment;
-use App\Models\Maintenance;
+use Illuminate\Http\Request;
+use App\Models\Transaction;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
-    public function index()
-    {
-        return view('admin.dashboard', [
-            'totalProperties' => Property::count(),
-            'activeProperties' => Property::where('status','active')->count(),
-            'totalUnits' => Property::sum('total_units'),
-            'totalTenants' => Tenant::count(),
-            'monthlyCollected' => RentPayment::whereMonth('payment_date',now()->month)->sum('amount'),
-            'openMaintenance' => Maintenance::where('status','!=','completed')->count(),
-        ]);
+    public function index(){
+        $latestUsers = User::latest()->take(10)->get();
+        $user_count = User::all()->count();
+
+        $latestTransactions = Transaction::latest()->take(10)->with('user')->get();
+        return view('admin.index', compact('latestUsers', 'latestTransactions','user_count'));
     }
 }

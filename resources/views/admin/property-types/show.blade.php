@@ -1,1 +1,0 @@
-@extends('layouts.admin.app') @section('title','Property Types Details') @section('content')<h1 class="page-title mb-4">Property Types Details</h1><div class="card p-4"><pre>{json_encode($item->toArray(),JSON_PRETTY_PRINT)}</pre></div>@endsection

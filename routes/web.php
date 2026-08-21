@@ -1,43 +1,38 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\PropertyController;
-use App\Http\Controllers\Admin\PropertyTypeController;
-use App\Http\Controllers\Admin\OwnerController;
-use App\Http\Controllers\Admin\TenantController;
-use App\Http\Controllers\Admin\AgentController;
-use App\Http\Controllers\Admin\LeadController;
-use App\Http\Controllers\Admin\PropertyVisitController;
-use App\Http\Controllers\Admin\BookingController;
-use App\Http\Controllers\Admin\RentalAgreementController;
-use App\Http\Controllers\Admin\RentPaymentController;
-use App\Http\Controllers\Admin\ExpenseController;
-use App\Http\Controllers\Admin\MaintenanceController;
-use App\Http\Controllers\Admin\VendorController;
+require __DIR__.'/admin.php';
+use App\Http\Controllers\User\WebController;
+use App\Http\Controllers\User\AuthController;
+use App\Http\Controllers\User\UserController;
 
-Route::get('/', fn () => redirect()->route('admin.dashboard'));
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::resource('properties', PropertyController::class);
-    Route::get('properties/{property}/units', [PropertyController::class, 'units'])->name('properties.units');
+   
+    //Website 
+    Route::get('/', [WebController::class, 'index'])->name('website.index');
+    Route::get('/about-us', [WebController::class, 'about'])->name('website.about');
+    Route::get('/services', [WebController::class, 'services'])->name('website.services');
+    Route::get('/services/{slug}', [WebController::class, 'serviceDetails'])->name('website.service.details');
+    Route::get('/blog', [WebController::class, 'blog'])->name('website.blog');
+    Route::get('/blog/{slug}', [WebController::class, 'blogDetails'])->name('website.blog.details');
+    Route::get('/contact-us', [WebController::class, 'contact'])->name('website.contact');
+    //USER START
 
-   Route::resource('property-types', PropertyTypeController::class)
-    ->except(['show'])
-    ->parameters([
-        'property-types' => 'propertyType'
-    ]);
-    Route::resource('owners', OwnerController::class);
-    Route::resource('tenants', TenantController::class);
-    Route::resource('agents', AgentController::class);
-    Route::resource('leads', LeadController::class);
-    Route::resource('visits', PropertyVisitController::class);
-    Route::resource('bookings', BookingController::class);
-    Route::resource('agreements', RentalAgreementController::class);
-    Route::resource('rent-payments', RentPaymentController::class);
-    Route::resource('expenses', ExpenseController::class);
-    Route::resource('maintenance', MaintenanceController::class);
-    Route::resource('vendors', VendorController::class);
-});
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login-user', [AuthController::class, 'loginuser_auth'])->name('loginuser');
+    Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register-user', [AuthController::class, 'register'])->name('registeruser');
+   
+    Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
+        // Logout route
+        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+        //user routes
+        Route::get('/profile', [UserController::class, 'profiles'])->name('profile');
+        Route::post('/update-profile-user', [UserController::class, 'updateprofile'])->name('updateprofile');
+    });
+    
+
+
+
+

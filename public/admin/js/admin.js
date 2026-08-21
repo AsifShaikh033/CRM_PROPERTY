@@ -1,1 +1,0 @@
-document.addEventListener('DOMContentLoaded',()=>{const b=document.getElementById('sidebarToggle'),s=document.getElementById('sidebar');if(b&&s)b.onclick=()=>s.classList.toggle('show');});
