@@ -12,13 +12,13 @@ class TenantController extends Controller
     {
         $items = Tenant::latest()->paginate(15);
 
-        return view('admin.tenants.index', compact('items'));
+        return view('Admin.tenants.index', compact('items'));
     }
 
 
     public function create()
     {
-        return view('admin.tenants.create');
+        return view('Admin.tenants.create');
     }
 
 
@@ -46,7 +46,7 @@ class TenantController extends Controller
 
     public function show(Tenant $tenant)
     {
-        return view('admin.tenants.show', [
+        return view('Admin.tenants.show', [
             'item' => $tenant
         ]);
     }
@@ -54,7 +54,7 @@ class TenantController extends Controller
 
     public function edit(Tenant $tenant)
     {
-        return view('admin.tenants.edit', [
+        return view('Admin.tenants.edit', [
             'item' => $tenant
         ]);
     }

@@ -20,7 +20,7 @@ class RentPaymentController extends Controller
             ->latest()
             ->paginate(15);
 
-        return view('admin.rent-payments.index', compact('items'));
+        return view('Admin.rent-payments.index', compact('items'));
     }
 
 
@@ -36,7 +36,7 @@ class RentPaymentController extends Controller
 
        // $units = collect();
 
-        return view('admin.rent-payments.create', compact(
+        return view('Admin.rent-payments.create', compact(
             'tenants',
             'properties',
            // 'units'
@@ -81,7 +81,7 @@ class RentPaymentController extends Controller
            // 'unit'
         ]);
 
-        return view('admin.rent-payments.show', [
+        return view('Admin.rent-payments.show', [
             'item' => $rentPayment
         ]);
     }
@@ -99,7 +99,7 @@ class RentPaymentController extends Controller
 
        // $units = collect();
 
-        return view('admin.rent-payments.edit', [
+        return view('Admin.rent-payments.edit', [
             'item' => $rentPayment,
             'tenants' => $tenants,
             'properties' => $properties,

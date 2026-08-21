@@ -24,12 +24,12 @@ class PropertyController extends Controller
             ->when($request->status, fn($q,$v)=>$q->where('status',$v))
             ->latest()->paginate(10)->withQueryString();
 
-        return view('admin.properties.index', compact('properties'));
+        return view('Admin.properties.index', compact('properties'));
     }
 
     public function create()
     {
-        return view('admin.properties.create', [
+        return view('Admin.properties.create', [
             'types'=>PropertyType::where('status','active')->get(),
             'owners'=>User::where('role','2')->get(),
         ]);
@@ -67,12 +67,12 @@ class PropertyController extends Controller
     public function show(Property $property)
     {
         $property->load(['propertyType','owner','units']);
-        return view('admin.properties.show',compact('property'));
+        return view('Admin.properties.show',compact('property'));
     }
 
     public function edit(Property $property)
     {
-        return view('admin.properties.edit',[
+        return view('Admin.properties.edit',[
             'property'=>$property,
             'types'=>PropertyType::where('status','active')->get(),
             'owners'=>User::where('role','2')->get(),
@@ -120,6 +120,6 @@ class PropertyController extends Controller
     public function units(Property $property)
     {
         $property->load('units');
-        return view('admin.properties.units',compact('property'));
+        return view('Admin.properties.units',compact('property'));
     }
 }

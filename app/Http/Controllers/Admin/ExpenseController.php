@@ -15,7 +15,7 @@ class ExpenseController extends Controller
             ->latest()
             ->paginate(15);
 
-        return view('admin.expenses.index', compact('items'));
+        return view('Admin.expenses.index', compact('items'));
     }
 
 
@@ -25,7 +25,7 @@ class ExpenseController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('admin.expenses.create', compact('properties'));
+        return view('Admin.expenses.create', compact('properties'));
     }
 
 
@@ -52,7 +52,7 @@ class ExpenseController extends Controller
     {
         $expense->load('property');
 
-        return view('admin.expenses.show', [
+        return view('Admin.expenses.show', [
             'item' => $expense
         ]);
     }
@@ -64,7 +64,7 @@ class ExpenseController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('admin.expenses.edit', [
+        return view('Admin.expenses.edit', [
             'item' => $expense,
             'properties' => $properties,
         ]);

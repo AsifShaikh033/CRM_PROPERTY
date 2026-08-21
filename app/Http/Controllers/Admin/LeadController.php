@@ -13,7 +13,7 @@ class LeadController extends Controller
     {
         $items = Lead::latest()->paginate(15);
 
-        return view('admin.leads.index', compact('items'));
+        return view('Admin.leads.index', compact('items'));
     }
 
 
@@ -22,7 +22,7 @@ class LeadController extends Controller
         $properties = Property::where('status', 'active')
         ->orderBy('name')
         ->get();
-        return view('admin.leads.create', compact('properties'));
+        return view('Admin.leads.create', compact('properties'));
     }
 
 
@@ -48,7 +48,7 @@ class LeadController extends Controller
 
     public function show(Lead $lead)
     {
-        return view('admin.leads.show', [
+        return view('Admin.leads.show', [
             'item' => $lead
         ]);
     }
@@ -59,7 +59,7 @@ class LeadController extends Controller
         $properties = Property::where('status', 'active')
         ->orderBy('name')
         ->get();
-        return view('admin.leads.edit', [
+        return view('Admin.leads.edit', [
             'item' => $lead,
             'properties' => $properties
         ]);

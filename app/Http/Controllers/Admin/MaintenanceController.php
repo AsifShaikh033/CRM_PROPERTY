@@ -19,7 +19,7 @@ class MaintenanceController extends Controller
         ->latest()
         ->paginate(15);
 
-        return view('admin.maintenance.index', compact('items'));
+        return view('Admin.maintenance.index', compact('items'));
     }
 
 
@@ -35,7 +35,7 @@ class MaintenanceController extends Controller
 
       //  $units = collect();
 
-        return view('admin.maintenance.create', compact(
+        return view('Admin.maintenance.create', compact(
             'properties',
             'tenants',
            // 'units'
@@ -78,7 +78,7 @@ class MaintenanceController extends Controller
             'tenant',
         ]);
 
-        return view('admin.maintenance.show', [
+        return view('Admin.maintenance.show', [
             'item' => $maintenance
         ]);
     }
@@ -96,7 +96,7 @@ class MaintenanceController extends Controller
 
        // $units = collect();
 
-        return view('admin.maintenance.edit', [
+        return view('Admin.maintenance.edit', [
             'item' => $maintenance,
             'properties' => $properties,
             'tenants' => $tenants,

@@ -16,7 +16,7 @@ class PropertyVisitController extends Controller
             ->latest()
             ->paginate(15);
 
-        return view('admin.visits.index', compact('items'));
+        return view('Admin.visits.index', compact('items'));
     }
 
 
@@ -30,7 +30,7 @@ class PropertyVisitController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('admin.visits.create', compact(
+        return view('Admin.visits.create', compact(
             'properties',
             'leads'
         ));
@@ -59,7 +59,7 @@ class PropertyVisitController extends Controller
     {
         $visit->load(['property', 'lead']);
 
-        return view('admin.visits.show', [
+        return view('Admin.visits.show', [
             'item' => $visit
         ]);
     }
@@ -75,7 +75,7 @@ class PropertyVisitController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('admin.visits.edit', [
+        return view('Admin.visits.edit', [
             'item' => $visit,
             'properties' => $properties,
             'leads' => $leads,
