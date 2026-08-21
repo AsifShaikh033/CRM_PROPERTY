@@ -41,7 +41,7 @@
                       aria-expanded="{{ Request::routeIs('admin.properties.*')
                             || Request::routeIs('admin.property-types.*') ? 'true' : 'false' }}">
 
-                        <i class="fas fa-layer-group"></i>
+                        <i class="fas fa-building"></i>
                         <p>Property</p>
                         <span class="caret"></span>
                     </a>
@@ -78,7 +78,7 @@
                     <a data-bs-toggle="collapse" href="#base" aria-expanded="{{ Request::routeIs('admin.webconfig.edit')
                          
                          || Request::routeIs('admin.web_config.about_section') ? 'true' : 'false' }}">
-                        <i class="fas fa-layer-group"></i>
+                        <i class="fas fa-cog"></i>
                         <p>Configuration</p>
                         <span class="caret"></span>
                     </a>
@@ -108,7 +108,7 @@
 
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#tables" aria-expanded="{{ Request::routeIs('admin.transaction.list') ? 'true' : 'false' }}">
-                        <i class="fas fa-th-list"></i>
+                        <i class="fas fa-money-bill"></i>
                         <p>Transactions</p>
                         <span class="caret"></span>
                     </a>

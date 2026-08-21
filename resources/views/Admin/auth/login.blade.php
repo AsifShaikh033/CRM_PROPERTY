@@ -13,7 +13,7 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-   background: linear-gradient(232deg, #ff0063, transparent);
+   background: linear-gradient(232deg, #846db1, transparent);
 }
 
 .box {
@@ -29,8 +29,8 @@ body{
 .box::before{
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
+    /* top: -50%;
+    left: -50%; */
     width: 380px;
     height: 420px;
     background: linear-gradient(0deg, transparent, transparent, #45f3ff, #45f3ff, #45f3ff);
@@ -42,8 +42,8 @@ body{
 .box::after{
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
+    /* top: -50%;
+    left: -50%; */
     width: 380px;
     height: 420px;
     background: linear-gradient(0deg, transparent, transparent, #45f3ff, #45f3ff, #45f3ff);
@@ -56,8 +56,8 @@ body{
 .borderLine::before{
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
+    /* top: -50%;
+    left: -50%; */
     width: 380px;
     height: 420px;
     background: linear-gradient(0deg, transparent, transparent, #ff2770, #ff2770, #ff2770);
@@ -71,9 +71,9 @@ body{
 {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 380px;
+        top: -50%;
+        left: -50%;
+    width: 580px;
     height: 420px;
     background: linear-gradient(0deg, transparent, transparent, #ff2770, #ff2770, #ff2770);
     z-index: 1;
@@ -82,7 +82,7 @@ body{
     animation-delay: -4.5s;
 }
 
-
+/* 
 @keyframes animate {
     0% {
         transform: rotate(0deg);
@@ -91,7 +91,7 @@ body{
         transform: rotate(360deg);
     }
     
-}
+} */
 
 .box form{
     position: absolute;
