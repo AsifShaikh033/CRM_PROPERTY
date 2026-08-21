@@ -20,7 +20,7 @@ class RentalAgreementController extends Controller
             ->latest()
             ->paginate(15);
 
-        return view('admin.agreements.index', compact('items'));
+        return view('Admin.agreements.index', compact('items'));
     }
 
 
@@ -42,7 +42,7 @@ class RentalAgreementController extends Controller
 
         $units = collect();
 
-        return view('admin.agreements.create', compact(
+        return view('Admin.agreements.create', compact(
             'properties',
             'tenants',
             'units'
@@ -82,7 +82,7 @@ class RentalAgreementController extends Controller
            // 'unit'
         ]);
 
-        return view('admin.agreements.show', [
+        return view('Admin.agreements.show', [
             'item' => $agreement
         ]);
     }
@@ -100,7 +100,7 @@ class RentalAgreementController extends Controller
 
         $units = collect();
 
-        return view('admin.agreements.edit', [
+        return view('Admin.agreements.edit', [
             'item' => $agreement,
             'properties' => $properties,
             'tenants' => $tenants,

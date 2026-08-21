@@ -12,13 +12,13 @@ class OwnerController extends Controller
     {
         $items = Owner::latest()->paginate(15);
 
-        return view('admin.owners.index', compact('items'));
+        return view('Admin.owners.index', compact('items'));
     }
 
 
     public function create()
     {
-        return view('admin.owners.create');
+        return view('Admin.owners.create');
     }
 
 
@@ -46,7 +46,7 @@ class OwnerController extends Controller
 
     public function show(Owner $owner)
     {
-        return view('admin.owners.show', [
+        return view('Admin.owners.show', [
             'item' => $owner
         ]);
     }
@@ -54,7 +54,7 @@ class OwnerController extends Controller
 
     public function edit(Owner $owner)
     {
-        return view('admin.owners.edit', [
+        return view('Admin.owners.edit', [
             'item' => $owner
         ]);
     }

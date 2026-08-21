@@ -12,13 +12,13 @@ class PropertyTypeController extends Controller
     {
         $items = PropertyType::latest()->paginate(15);
 
-        return view('admin.property-types.index', compact('items'));
+        return view('Admin.property-types.index', compact('items'));
     }
 
 
     public function create()
     {
-        return view('admin.property-types.create');
+        return view('Admin.property-types.create');
     }
 
 
@@ -39,7 +39,7 @@ class PropertyTypeController extends Controller
 
     public function edit(PropertyType $property_type)
     {
-        return view('admin.property-types.edit', [
+        return view('Admin.property-types.edit', [
             'item' => $property_type
         ]);
     }

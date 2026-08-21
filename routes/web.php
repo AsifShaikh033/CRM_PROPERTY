@@ -8,6 +8,25 @@ use App\Http\Controllers\Admin\DashboardController;
 
 
     
+
+Route::get('/link-storage', function () {
+    try {
+       $target = storage_path('app/public');
+        $link = public_path('storage');
+        if (!file_exists($link)) {
+            \File::copyDirectory($target, $link);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Storage link created successfully!',
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Error: ' . $e->getMessage(),
+        ], 500);
+    }
+});
     // Dashboard
     Route::prefix('')->name('admin.')->middleware('auth:admin')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');

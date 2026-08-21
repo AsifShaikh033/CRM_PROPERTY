@@ -25,6 +25,6 @@ class DashboardController extends Controller
             'openMaintenance' => Maintenance::where('status','!=','completed')->count(),
         ];
 
-        return view('admin.index', compact('dashboardData'));
+        return view('Admin.index', compact('dashboardData'));
     }
 }

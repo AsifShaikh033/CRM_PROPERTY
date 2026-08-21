@@ -7,19 +7,19 @@ use Illuminate\Http\Request;
 
 class VendorController extends Controller
 {
-    public function index() { $items=Vendor::latest()->paginate(15); return view('admin.vendors.index',compact('items')); }
-    public function create() { return view('admin.vendors.create'); }
+    public function index() { $items=Vendor::latest()->paginate(15); return view('Admin.vendors.index',compact('items')); }
+    public function create() { return view('Admin.vendors.create'); }
     public function store(Request $request) { Vendor::create($request->validate(['name'=>'required|string|max:255','email'=>'nullable|email','phone'=>'nullable|string|max:255','company'=>'nullable|string|max:255','status'=>'required|string|max:50'])); return redirect()->route('admin.vendors.index')->with('success','Record created successfully.'); }
    public function show(Vendor $vendor)
     {
-        return view('admin.vendors.show', [
+        return view('Admin.vendors.show', [
             'item' => $vendor
         ]);
     }
 
     public function edit(Vendor $vendor)
     {
-        return view('admin.vendors.edit', [
+        return view('Admin.vendors.edit', [
             'item' => $vendor
         ]);
     }

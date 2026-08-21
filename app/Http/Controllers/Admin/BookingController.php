@@ -16,7 +16,7 @@ class BookingController extends Controller
             ->latest()
             ->paginate(15);
 
-        return view('admin.bookings.index', compact('items'));
+        return view('Admin.bookings.index', compact('items'));
     }
 
 
@@ -30,7 +30,7 @@ class BookingController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('admin.bookings.create', compact(
+        return view('Admin.bookings.create', compact(
             'properties',
             'tenants'
         ));
@@ -60,7 +60,7 @@ class BookingController extends Controller
     {
         $booking->load(['property', 'tenant']);
 
-        return view('admin.bookings.show', [
+        return view('Admin.bookings.show', [
             'item' => $booking
         ]);
     }
@@ -76,7 +76,7 @@ class BookingController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('admin.bookings.edit', [
+        return view('Admin.bookings.edit', [
             'item' => $booking,
             'properties' => $properties,
             'tenants' => $tenants,
