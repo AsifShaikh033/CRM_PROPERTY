@@ -9,7 +9,9 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\WebConfigController;
 use App\Http\Controllers\Admin\ManageUserController;
 use App\Http\Controllers\Admin\TransactionController;
-
+// ----------------------------- //
+use App\Http\Controllers\Admin\PropertyController;
+use App\Http\Controllers\Admin\PropertyTypeController;
 
 Route::prefix('admin')->group(function () {
 
@@ -47,6 +49,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
 
     //Transactions
     Route::get('/transactions', [TransactionController::class, 'list'])->name('transaction.list');
+
+    // --------------------------- //
+    Route::resource('properties', PropertyController::class);
+    Route::resource('property-types', PropertyTypeController::class)->except(['show']);
 
 });
 

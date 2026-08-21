@@ -7,6 +7,8 @@ use App\Models\PropertyType;
 use App\Models\Owner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class PropertyController extends Controller
 {
@@ -29,7 +31,7 @@ class PropertyController extends Controller
     {
         return view('admin.properties.create', [
             'types'=>PropertyType::where('status','active')->get(),
-            'owners'=>Owner::where('status','active')->get(),
+            'owners'=>User::where('role','2')->get(),
         ]);
     }
 
@@ -39,14 +41,14 @@ class PropertyController extends Controller
             'name'=>'required|string|max:255',
             'property_code'=>'required|string|max:100|unique:properties,property_code',
             'property_type_id'=>'required|exists:property_types,id',
-            'owner_id'=>'nullable|exists:owners,id',
+            'owner_id'=>'nullable|exists:users,id',
             'phone'=>'nullable|string|max:30',
             'email'=>'nullable|email|max:255',
             'address'=>'nullable|string',
             'city'=>'nullable|string|max:100',
             'state'=>'nullable|string|max:100',
             'country'=>'required|string|max:100',
-            'total_units'=>'required|integer|min:1',
+            'total_units'=>'integer|min:1',
             'monthly_rent'=>'nullable|numeric|min:0',
             'status'=>'required|in:active,draft,inactive',
             'description'=>'nullable|string',
@@ -73,7 +75,7 @@ class PropertyController extends Controller
         return view('admin.properties.edit',[
             'property'=>$property,
             'types'=>PropertyType::where('status','active')->get(),
-            'owners'=>Owner::where('status','active')->get(),
+            'owners'=>User::where('role','2')->get(),
         ]);
     }
 
@@ -83,14 +85,14 @@ class PropertyController extends Controller
             'name'=>'required|string|max:255',
             'property_code'=>'required|string|max:100|unique:properties,property_code,'.$property->id,
             'property_type_id'=>'required|exists:property_types,id',
-            'owner_id'=>'nullable|exists:owners,id',
+            'owner_id'=>'nullable|exists:users,id',
             'phone'=>'nullable|string|max:30',
             'email'=>'nullable|email|max:255',
             'address'=>'nullable|string',
             'city'=>'nullable|string|max:100',
             'state'=>'nullable|string|max:100',
             'country'=>'required|string|max:100',
-            'total_units'=>'required|integer|min:1',
+            'total_units'=>'integer|min:1',
             'monthly_rent'=>'nullable|numeric|min:0',
             'status'=>'required|in:active,draft,inactive',
             'description'=>'nullable|string',
