@@ -15,10 +15,12 @@
                             <h4 class="card-title mb-0">
                                 Properties List
                             </h4>
+                            @can('properties.create')
                             <a href="{{ route('admin.properties.create') }}"
                             class="btn btn-primary">
                                 + Add Property
                             </a>
+                            @endcan
                         </div>
                     </div>
                     <div class="card-body">
@@ -52,9 +54,12 @@
                                                     <i class="fa fa-eye"></i>
                                                 </a>
 
+                                                @can('properties.edit')
                                                 <a href="{{ route('admin.properties.edit',$p) }}" class="btn btn-link btn-primary btn-lg">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
+                                                @endcan
+                                                @can('properties.delete')
                                                 <button type="button"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#deleteModal"
@@ -62,6 +67,7 @@
                                                         class="btn btn-link btn-danger">
                                                     <i class="fa fa-times"></i>
                                                 </button>
+                                                @endcan
                                             </div>
                                         </td>
                                     </tr>

@@ -60,9 +60,9 @@
                                     <div class="row">
                                         <div class="col-6 col-sm-4">
                                             <label class="imagecheck mb-4">
-                                                <input name="image" type="file" value="1" class="imagecheck-input" />
+                                                <input name="identity_image" type="file" value="1" class="imagecheck-input" />
                                                 <figure class="imagecheck-figure">
-                                                  <img src="{{ asset('storage/' . $user->image) }}" alt="title" class="avatar-img" />
+                                                  <img src="{{ asset('storage/' . $user->identity_image) }}" alt="title" class="avatar-img" />
                                                 </figure>
                                             </label>
                                         </div>

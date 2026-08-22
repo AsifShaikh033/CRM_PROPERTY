@@ -330,14 +330,14 @@
                   >
                     <div class="avatar-sm">
                     <img 
-    src="{{ Auth::guard('admin')->user()->image ? asset('storage/' . Auth::guard('admin')->user()->image) : asset('assets/img/profile.jpg') }}" 
+    src="{{ Auth::guard('web')->user()->identity_image ? asset('storage/' . Auth::guard('web')->user()->identity_image) : asset('assets/img/profile.jpg') }}" 
     alt="Admin Profile" 
     class="avatar-img rounded-circle"
 />
 
                     </div>
                     <span class="profile-username">
-                      <span class="op-7">{{Auth::guard('admin')->user()->name}}</span>
+                      <span class="op-7">{{Auth::guard('web')->user()->name}}</span>
                     </span>
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -346,14 +346,14 @@
                         <div class="user-box">
                           <div class="avatar-lg">
                             <img
-                              src="{{ Auth::guard('admin')->user()->image ? asset('storage/' . Auth::guard('admin')->user()->image) : asset('assets/img/profile.jpg') }}" 
+                              src="{{ Auth::guard('web')->user()->identity_image ? asset('storage/' . Auth::guard('web')->user()->identity_image) : asset('assets/img/profile.jpg') }}" 
                               alt="image profile"
                               class="avatar-img rounded"
                             />
                           </div>
                           <div class="u-text">
-                            <h4>{{Auth::guard('admin')->user()->name}}</h4>
-                            <p class="text-muted">{{Auth::guard('admin')->user()->email}}</p>
+                            <h4>{{Auth::guard('web')->user()->name}}</h4>
+                            <p class="text-muted">{{Auth::guard('web')->user()->email}}</p>
                             <a
                               href="{{ route('admin.profile')}}"
                               class="btn btn-xs btn-secondary btn-sm"

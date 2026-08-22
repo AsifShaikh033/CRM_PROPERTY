@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\WebConfigController;
 use App\Http\Controllers\Admin\ManageUserController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\RoleController;
+
 // ----------------------------- //
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\PropertyTypeController;
@@ -22,7 +24,7 @@ Route::prefix('admin')->group(function () {
 });
 
 
-Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
     //WEB CONFIF
     Route::prefix('web-config')->controller(WebConfigController::class)->group(function () {
@@ -42,10 +44,31 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     //User
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 
-    Route::get('/users', [ManageUserController::class, 'list'])->name('user.list');
-    Route::get('/edit-user/{id}', [ManageUserController::class, 'editUser'])->name('editUser');
-    Route::post('/update-user/{id}', [ManageUserController::class, 'updateUser'])->name('updateUser');
-    Route::post('/deleteUser', [ManageUserController::class, 'destroy'])->name('deleteUser');
+    Route::get('/users', [ManageUserController::class, 'list'])->name('user.list')->middleware('permission:users.view');
+    Route::get('/users/create', [ManageUserController::class, 'create'])->name('user.create')->middleware('permission:users.create');
+    Route::post('/users/store', [ManageUserController::class, 'store'])->name('user.store')->middleware('permission:users.create');
+    Route::get('/edit-user/{id}', [ManageUserController::class, 'editUser'])->name('editUser')->middleware('permission:users.edit');
+    Route::post('/update-user/{id}', [ManageUserController::class, 'updateUser'])->name('updateUser')->middleware('permission:users.edit');
+    Route::post('/deleteUser', [ManageUserController::class, 'destroy'])->name('deleteUser')->middleware('permission:users.delete');
+    //Agents
+    Route::get('/users/type/agents', [ManageUserController::class, 'agentList'])->name('agent.list')->middleware('permission:agents.view');
+    //Owners
+    Route::get('/users/type/owners', [ManageUserController::class, 'ownerList'])->name('owner.list')->middleware('permission:owners.view');
+    //Tenants
+    Route::get('/users/type/tenants', [ManageUserController::class, 'tenantList'])->name('tenant.list')->middleware('permission:tenants.view');
+    /*
+    |--------------------------------------------------------------------------
+    | Roles
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get('/roles', [RoleController::class, 'index']) ->middleware('permission:roles.view')->name('roles.index');
+    Route::get('/roles/create', [RoleController::class, 'create']) ->middleware('permission:roles.create')->name('roles.create');
+    Route::post('/roles/store', [RoleController::class, 'store']) ->middleware('permission:roles.create')->name('roles.store');
+    Route::get('/roles/{id}/edit', [RoleController::class, 'edit']) ->middleware('permission:roles.edit')->name('roles.edit');
+    Route::post('/roles/{id}/update', [RoleController::class, 'update']) ->middleware('permission:roles.edit')->name('roles.update');
+    Route::post('/roles/{id}/delete', [RoleController::class, 'destroy']) ->middleware('permission:roles.delete')->name('roles.delete');
+
 
     //Transactions
     Route::get('/transactions', [TransactionController::class, 'list'])->name('transaction.list');
