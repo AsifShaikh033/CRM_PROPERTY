@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Property;
 use App\Models\Tenant;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -26,9 +27,13 @@ class BookingController extends Controller
             ->orderBy('name')
             ->get();
 
-        $tenants = Tenant::where('status', 'active')
-            ->orderBy('name')
-            ->get();
+        // $tenants = Tenant::where('status', 'active')
+        //     ->orderBy('name')
+        //     ->get();
+        $tenants = User::where('role', 2)
+        ->orderBy('name')
+        ->get();
+
 
         return view('Admin.bookings.create', compact(
             'properties',
@@ -41,7 +46,7 @@ class BookingController extends Controller
     {
         $data = $request->validate([
             'property_id' => 'nullable|exists:properties,id',
-            'tenant_id' => 'nullable|exists:tenants,id',
+            'tenant_id' => 'nullable|exists:users,id',
             'booking_date' => 'required|date',
             'amount' => 'required|numeric|min:0',
             'status' => 'required|in:pending,confirmed,cancelled,completed',
@@ -72,9 +77,12 @@ class BookingController extends Controller
             ->orderBy('name')
             ->get();
 
-        $tenants = Tenant::where('status', 'active')
-            ->orderBy('name')
-            ->get();
+        // $tenants = Tenant::where('status', 'active')
+        //     ->orderBy('name')
+        //     ->get();
+        $tenants = User::where('role', 2)
+        ->orderBy('name')
+        ->get();
 
         return view('Admin.bookings.edit', [
             'item' => $booking,
@@ -88,7 +96,7 @@ class BookingController extends Controller
     {
         $data = $request->validate([
             'property_id' => 'nullable|exists:properties,id',
-            'tenant_id' => 'nullable|exists:tenants,id',
+            'tenant_id' => 'nullable|exists:users,id',
             'booking_date' => 'required|date',
             'amount' => 'required|numeric|min:0',
             'status' => 'required|in:pending,confirmed,cancelled,completed',

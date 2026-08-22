@@ -20,7 +20,7 @@ class DashboardController extends Controller
              'latestTransactions' => Transaction::latest()->take(10)->with('user')->get(),
             'totalProperties' => Property::count(),
             'activeProperties' => Property::where('status','active')->count(),
-            'totalTenants' => Tenant::count(),
+            // 'totalTenants' => Tenant::count(),
             'monthlyCollected' => RentPayment::whereMonth('payment_date',now()->month)->sum('amount'),
             'openMaintenance' => Maintenance::where('status','!=','completed')->count(),
         ];
