@@ -29,12 +29,21 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
+                @can('dashboard.view')
                   <li class="nav-item ">
                       <a href="{{ route('admin.index') }}" class="collapsed">
                           <i class="fas fa-home"></i>
                           <p>Dashboard</p>
                       </a>
                   </li>
+                  @endcan
+                   <li class="nav-section">
+                  <span class="sidebar-mini-icon">
+                    <i class="fa fa-ellipsis-h"></i>
+                  </span>
+                    <h4 class="text-section">Management</h4>
+                </li>
+                @can('properties.view')
                   <li class="nav-item">
                     <a data-bs-toggle="collapse"
                       href="#property"
@@ -51,30 +60,90 @@
                         id="property">
 
                         <ul class="nav nav-collapse">
+                            @can('property-types.view')
                             <li>
                                 <a href="{{ route('admin.property-types.index') }}"
                                   class="{{ Request::routeIs('admin.property-types.*') ? 'active' : '' }}">
                                     <span class="sub-item">Property-Types</span>
                                 </a>
                             </li>
+                            @endcan
+                            @can('properties.view')
                             <li>
                                 <a href="{{ route('admin.properties.index') }}"
                                   class="{{ Request::routeIs('admin.properties.*') ? 'active' : '' }}">
                                     <span class="sub-item">Properties</span>
                                 </a>
                             </li>
-
+                            @endcan
                         </ul>
                     </div>
                 </li>
+             @endcan
 
-                <li class="nav-section">
+             @can('owners.view')
+             <li class="nav-item {{ Request::routeIs('admin.owner.list') ? 'active' : '' }}">
+                    <a href="{{ route('admin.owner.list') }}">
+                        <i class="fas fa-user-tie"></i>
+                        <p>Owners</p>
+                    </a>
+                </li>
+             @endcan
+             @can('tenants.view')
+             <li class="nav-item {{ Request::routeIs('admin.tenant.list') ? 'active' : '' }}">
+                    <a href="{{ route('admin.tenant.list') }}">
+                        <i class="fas fa-user-tie"></i>
+                        <p>Tenants</p>
+                    </a>
+                </li>
+             @endcan
+
+              @can('agents.view')
+                <li class="nav-item {{ Request::routeIs('admin.agent.list') ? 'active' : '' }}">
+                    <a href="{{ route('admin.agent.list') }}">
+                        <i class="fas fa-user-tie"></i>
+                        <p>Agents</p>
+                    </a>
+                </li>
+                @endcan
+                @can('users.view')
+                <li class="nav-item {{ Request::routeIs('admin.user.list') ? 'active' : '' }} {{ Request::routeIs('admin.user.create') ? 'active' : '' }}
+                {{ Request::routeIs('admin.editUser') ? 'active' : '' }}">
+                    <a href="{{ route('admin.user.list') }}">
+                        <i class="fas fa-users"></i>
+                        <p>Users</p>
+                    </a>
+                </li>
+                @endcan
+
+                @can('roles.view')
+                    <li class="nav-section">
+                    <span class="sidebar-mini-icon">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </span>
+                        <h4 class="text-section">Roles & Permissions</h4>
+                    </li>
+
+                    <li class="nav-item {{ Request::routeIs('admin.roles.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.roles.index') }}">
+                            <i class="fas fa-user-shield"></i>
+                            <p>
+                                Roles
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+
+
+
+                @can('configurations.view')
+                 <li class="nav-section">
                   <span class="sidebar-mini-icon">
                     <i class="fa fa-ellipsis-h"></i>
                   </span>
-                    <h4 class="text-section">Components</h4>
+                    <h4 class="text-section">Configuration</h4>
                 </li>
-                <li class="nav-item">
+                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#base" aria-expanded="{{ Request::routeIs('admin.webconfig.edit')
                          
                          || Request::routeIs('admin.web_config.about_section') ? 'true' : 'false' }}">
@@ -95,34 +164,7 @@
                         </ul>
                     </div>
                 </li>
-
-
-
-                <li class="nav-item {{ Request::routeIs('admin.user.list') ? 'active' : '' }}">
-                    <a href="{{ route('admin.user.list') }}">
-                        <i class="fas fa-users"></i>
-                        <p>Users</p>
-                    </a>
-                </li>
-
-
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#tables" aria-expanded="{{ Request::routeIs('admin.transaction.list') ? 'true' : 'false' }}">
-                        <i class="fas fa-money-bill"></i>
-                        <p>Transactions</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse {{ Request::routeIs('admin.transaction.list') ? 'show' : '' }}" id="tables">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="{{ route('admin.transaction.list') }}" class="{{ Request::routeIs('admin.transaction.list') ? 'active' : '' }}">
-                                    <span class="sub-item">Transaction List</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
+                @endcan
 
 
             </ul>

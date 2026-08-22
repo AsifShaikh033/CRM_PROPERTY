@@ -10,7 +10,7 @@
         <div class="page-header">
 
             <h3 class="fw-bold mb-3">
-                Edit User
+                Add User
             </h3>
 
         </div>
@@ -25,8 +25,16 @@
                     {{-- Card Header --}}
                     <div class="card-header">
 
-                        <div class="card-title">
-                            User Details
+                        <div>
+
+                            <h4 class="card-title mb-1">
+                                Create New User
+                            </h4>
+
+                            <p class="text-muted mb-0">
+                                Enter the user details and assign a role.
+                            </p>
+
                         </div>
 
                     </div>
@@ -34,7 +42,7 @@
 
                     <div class="card-body">
 
-                        {{-- Validation Errors --}}
+                        {{-- Errors --}}
                         @if ($errors->any())
 
                             <div class="alert alert-danger">
@@ -61,7 +69,7 @@
 
 
                         <form
-                            action="{{ route('admin.updateUser', $Data->id) }}"
+                            action="{{ route('admin.user.store') }}"
                             method="POST"
                             enctype="multipart/form-data"
                         >
@@ -72,8 +80,8 @@
                             <div class="row">
 
 
-                                {{-- First Name --}}
-                                <div class="col-md-6 col-lg-6">
+                                {{-- Name --}}
+                                <div class="col-md-6">
 
                                     <div class="form-group">
 
@@ -85,10 +93,10 @@
                                         <input
                                             type="text"
                                             name="name"
-                                            class="form-control"
                                             id="name"
-                                            value="{{ old('name', $Data->name) }}"
-                                            placeholder="Enter First Name"
+                                            class="form-control"
+                                            value="{{ old('name') }}"
+                                            placeholder="Enter first name"
                                             required
                                         >
 
@@ -98,7 +106,7 @@
 
 
                                 {{-- Last Name --}}
-                                <div class="col-md-6 col-lg-6">
+                                <div class="col-md-6">
 
                                     <div class="form-group">
 
@@ -109,10 +117,10 @@
                                         <input
                                             type="text"
                                             name="last_name"
-                                            class="form-control"
                                             id="last_name"
-                                            value="{{ old('last_name', $Data->last_name) }}"
-                                            placeholder="Enter Last Name"
+                                            class="form-control"
+                                            value="{{ old('last_name') }}"
+                                            placeholder="Enter last name"
                                         >
 
                                     </div>
@@ -121,7 +129,7 @@
 
 
                                 {{-- Email --}}
-                                <div class="col-md-6 col-lg-6">
+                                <div class="col-md-6">
 
                                     <div class="form-group">
 
@@ -133,10 +141,87 @@
                                         <input
                                             type="email"
                                             name="email"
-                                            class="form-control"
                                             id="email"
-                                            value="{{ old('email', $Data->email) }}"
-                                            placeholder="Enter Email"
+                                            class="form-control"
+                                            value="{{ old('email') }}"
+                                            placeholder="Enter email address"
+                                            required
+                                        >
+
+                                    </div>
+
+                                </div>
+
+
+                                {{-- Mobile --}}
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+
+                                        <label for="mob_number">
+                                            Mobile Number
+                                            <span class="text-danger">*</span>
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            name="mob_number"
+                                            id="mob_number"
+                                            class="form-control"
+                                            value="{{ old('mob_number') }}"
+                                            placeholder="Enter mobile number"
+                                            required
+                                        >
+
+                                    </div>
+
+                                </div>
+
+
+                                {{-- Password --}}
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+
+                                        <label for="password">
+                                            Password
+                                            <span class="text-danger">*</span>
+                                        </label>
+
+                                        <input
+                                            type="password"
+                                            name="password"
+                                            id="password"
+                                            class="form-control"
+                                            placeholder="Enter password"
+                                            required
+                                        >
+
+                                        <small class="text-muted">
+                                            Minimum 8 characters.
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+
+                                {{-- Confirm Password --}}
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+
+                                        <label for="password_confirmation">
+                                            Confirm Password
+                                            <span class="text-danger">*</span>
+                                        </label>
+
+                                        <input
+                                            type="password"
+                                            name="password_confirmation"
+                                            id="password_confirmation"
+                                            class="form-control"
+                                            placeholder="Confirm password"
                                             required
                                         >
 
@@ -146,12 +231,12 @@
 
 
                                 {{-- Role --}}
-                                <div class="col-md-6 col-lg-6">
+                                <div class="col-md-6">
 
                                     <div class="form-group">
 
                                         <label for="role">
-                                            Role
+                                            User Role
                                             <span class="text-danger">*</span>
                                         </label>
 
@@ -170,7 +255,7 @@
 
                                                 <option
                                                     value="{{ $role->name }}"
-                                                    {{ $Data->hasRole($role->name) ? 'selected' : '' }}
+                                                    {{ old('role') == $role->name ? 'selected' : '' }}
                                                 >
                                                     {{ $role->name }}
                                                 </option>
@@ -180,7 +265,7 @@
                                         </select>
 
                                         <small class="text-muted">
-                                            The selected role controls this user's permissions.
+                                            The selected role controls the user's permissions.
                                         </small>
 
                                     </div>
@@ -188,35 +273,8 @@
                                 </div>
 
 
-                               
-
-                                {{-- Mobile Number --}}
-                                <div class="col-md-6 col-lg-6">
-
-                                    <div class="form-group">
-
-                                        <label for="mob_number">
-                                            Mobile Number
-                                            <span class="text-danger">*</span>
-                                        </label>
-
-                                        <input
-                                            type="text"
-                                            name="mob_number"
-                                            class="form-control"
-                                            id="mob_number"
-                                            value="{{ old('mob_number', $Data->mob_number) }}"
-                                            placeholder="Enter Mobile Number"
-                                            required
-                                        >
-
-                                    </div>
-
-                                </div>
-
-
                                 {{-- Address --}}
-                                <div class="col-md-6 col-lg-6">
+                                <div class="col-md-6">
 
                                     <div class="form-group">
 
@@ -227,10 +285,10 @@
                                         <input
                                             type="text"
                                             name="address"
-                                            class="form-control"
                                             id="address"
-                                            value="{{ old('address', $Data->address) }}"
-                                            placeholder="Enter Address"
+                                            class="form-control"
+                                            value="{{ old('address') }}"
+                                            placeholder="Enter address"
                                         >
 
                                     </div>
@@ -239,7 +297,7 @@
 
 
                                 {{-- City --}}
-                                <div class="col-md-6 col-lg-6">
+                                <div class="col-md-6">
 
                                     <div class="form-group">
 
@@ -250,10 +308,10 @@
                                         <input
                                             type="text"
                                             name="city"
-                                            class="form-control"
                                             id="city"
-                                            value="{{ old('city', $Data->city) }}"
-                                            placeholder="Enter City"
+                                            class="form-control"
+                                            value="{{ old('city') }}"
+                                            placeholder="Enter city"
                                         >
 
                                     </div>
@@ -261,8 +319,8 @@
                                 </div>
 
 
-                                {{-- Profile Image --}}
-                                <div class="col-md-6 col-lg-6">
+                                {{-- Profile --}}
+                                <div class="col-md-6">
 
                                     <div class="form-group">
 
@@ -273,33 +331,13 @@
                                         <input
                                             type="file"
                                             name="profile"
-                                            class="form-control"
                                             id="profile"
+                                            class="form-control"
                                         >
 
                                         <small class="text-muted">
                                             JPG, PNG or GIF. Maximum 2MB.
                                         </small>
-
-
-                                        @if($Data->identity_image)
-
-                                            <div class="mt-3">
-
-                                                <img
-                                                    src="{{ asset('storage/' . $Data->identity_image) }}"
-                                                    alt="Profile Image"
-                                                    class="img-thumbnail"
-                                                    style="
-                                                        width:120px;
-                                                        height:120px;
-                                                        object-fit:cover;
-                                                    "
-                                                >
-
-                                            </div>
-
-                                        @endif
 
                                     </div>
 
@@ -310,17 +348,18 @@
 
                             {{-- Buttons --}}
                             <div class="card-action mt-4">
-                             @can('users.edit')
+                                @can('users.create')
                                 <button
                                     type="submit"
                                     class="btn btn-success"
                                 >
 
                                     <i class="fa fa-save"></i>
-                                    Update User
+
+                                    Create User
 
                                 </button>
-                                @endcan
+                                @endcan 
 
 
                                 <a
@@ -329,6 +368,7 @@
                                 >
 
                                     <i class="fa fa-times"></i>
+
                                     Cancel
 
                                 </a>

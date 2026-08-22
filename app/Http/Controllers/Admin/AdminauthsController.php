@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -14,7 +15,7 @@ class AdminauthsController extends Controller
     public function showLoginForm()
     {
        
-        if(Auth::guard('admin')->check()){
+        if(Auth::check()){
             return redirect()->route('admin.index');
         }else{
             return view('Admin.auth.login');    
@@ -29,7 +30,7 @@ class AdminauthsController extends Controller
             'password' => 'required|string',
         ]);
     
-        if (Auth::guard('admin')->attempt(['email' => $validated['email'], 'password' => $validated['password']])) {
+        if (Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']])) {
             return redirect()->route('admin.index');
         } else {
             // If the credentials are incorrect, return an error
@@ -40,7 +41,7 @@ class AdminauthsController extends Controller
 
    public function profile_edit()
     {
-        $user = Auth::guard('admin')->user();
+        $user = Auth::user();
         return view('Admin.auth.profile', compact('user'));
     }
 
@@ -56,7 +57,7 @@ public function update(Request $request, $id)
     //     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     // ]);
 
-    $user = Admin::findOrFail($id);
+    $user = User::findOrFail($id);
     $user->name = $request->input('name');
     $user->email = $request->input('email');
 
@@ -64,12 +65,12 @@ public function update(Request $request, $id)
         $user->password =  Hash::make($request->input('password'));
     }
 
-    if ($request->hasFile('image')) {
-        if (!empty($user->image) && Storage::disk('public')->exists($user->image)) {
-            Storage::disk('public')->delete($user->image);
+    if ($request->hasFile('identity_image')) {
+        if (!empty($user->identity_image) && Storage::disk('public')->exists($user->identity_image)) {
+            Storage::disk('public')->delete($user->identity_image);
         }
-        $path = $request->file('image')->store('uploads/admin', 'public');
-        $user->image = $path;
+        $path = $request->file('identity_image')->store('uploads/admin', 'public');
+        $user->identity_image = $path;
     }
 
    
@@ -83,7 +84,7 @@ public function update(Request $request, $id)
 
     public function logout()
     {
-        Auth::guard('admin')->logout();
+        Auth::logout();
         return redirect()->route('admin.login');
     }
   

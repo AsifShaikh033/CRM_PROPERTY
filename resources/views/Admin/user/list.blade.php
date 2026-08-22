@@ -5,14 +5,25 @@
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Users</h3>
+            <h3 class="fw-bold mb-3">{{ $userType }}s</h3>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
+                   <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h4 class="card-title">Users List</h4>
+                            <h4 class="card-title">
+                                {{ $userType }}s List
+                            </h4>
+                            @can('users.create')
+                                <a
+                                    href="{{ route('admin.user.create') }}"
+                                    class="btn btn-primary btn-round ms-auto"
+                                >
+                                    <i class="fa fa-plus"></i>
+                                    Add User
+                                </a>
+                            @endcan
                         </div>
                     </div>
                     <div class="card-body">
@@ -22,6 +33,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Role</th>
                                         <th>Address</th>
                                         <th style="width: 10%">Action</th>
                                     </tr>
@@ -31,6 +43,7 @@
                                     <tr>
                                         <td>{{ $userData->name }}</td>
                                         <td>{{ $userData->email }}</td>
+                                        <td>{{ $userData->roles->first()->name ?? 'N/A' }}</td>
                                         <td>{{ $userData->address }}</td>
                                         <td>
                                             <div class="form-button-action">
