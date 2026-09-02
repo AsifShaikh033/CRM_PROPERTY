@@ -81,6 +81,15 @@
                 </li>
              @endcan
 
+             @can('leads.view')
+             <li class="nav-item {{ Request::routeIs('admin.leads.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.leads.index') }}">
+                        <i class="fas fa-user-tag"></i>
+                        <p>Leads</p>
+                    </a>
+                </li>
+             @endcan
+
              @can('bookings.view')
              <li class="nav-item {{ Request::routeIs('admin.bookings.index') ? 'active' : '' }}">
                     <a href="{{ route('admin.bookings.index') }}">
