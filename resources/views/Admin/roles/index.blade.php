@@ -145,7 +145,8 @@
 
 
                                                     {{-- Delete --}}
-                                                    @if($role->name !== 'Admin')
+                                                    @if($role->name !== 'Admin' && $role->name !== 'Agent' 
+                                                    && $role->name !== 'Owner'  && $role->name !== 'User') 
 
                                                         @can('roles.delete')
 
@@ -160,7 +161,7 @@
                                                             >
 
                                                                 <i class="fa fa-times"></i>
-
+                                                                {{$role->name}}
                                                             </button>
 
                                                         @endcan
