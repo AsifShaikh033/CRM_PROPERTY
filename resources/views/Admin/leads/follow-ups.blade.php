@@ -1,0 +1,5 @@
+@extends('Admin.layout.main')
+@section('title', 'Follow-up History')
+@section('content')
+<div class="container"><div class="page-inner"><div class="page-header d-flex justify-content-between"><div><h3 class="fw-bold mb-1">Follow-up History</h3><p class="mb-0">{{ $lead->lead_name }} · {{ $lead->phone }}</p></div><div><a href="{{ route('admin.leads.follow-ups.create', $lead) }}" class="btn btn-success">+ Add Follow-up</a><a href="{{ route('admin.leads.show', $lead) }}" class="btn btn-light">Lead Details</a></div></div><div class="card"><div class="card-body">@forelse($followUps as $followUp)<div class="border-bottom pb-3 mb-3"><strong>{{ $followUp->contact_date->format('d M Y') }}</strong> · {{ $followUp->contact_method }}<br><strong>Outcome:</strong> {{ $followUp->outcome }}<br><strong>Next Action:</strong> {{ $followUp->next_action ?? '-' }}<br><strong>Agent:</strong> {{ $followUp->agentUser?->name ?? '-' }}<br><strong>Notes:</strong> {{ $followUp->call_notes ?? '-' }}</div>@empty<p class="mb-0">No follow-ups have been recorded.</p>@endforelse</div></div></div></div>
+@endsection
