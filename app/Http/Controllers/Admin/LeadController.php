@@ -26,7 +26,7 @@ class LeadController extends Controller
                         ->orWhereHas('assignedAgent', fn ($query) => $query->where('name', 'like', "%{$value}%"));
                 });
             })
-            ->latest()->paginate(15)->withQueryString();
+            ->latest()->get();
 
         return view('Admin.leads.index', compact('items'));
     }
@@ -81,14 +81,6 @@ class LeadController extends Controller
             ->with('success', 'Lead deleted successfully.');
     }
 
-    public function followUps(Lead $lead)
-    {
-        $lead->load(['property', 'assignedAgent']);
-        $followUps = $lead->followUps()->with('agentUser')->orderByDesc('contact_date')->latest()->get();
-
-        return view('Admin.leads.follow-ups', compact('lead', 'followUps'));
-    }
-
     public function createFollowUp(Lead $lead)
     {
         $lead->load(['property', 'assignedAgent']);
@@ -117,7 +109,7 @@ class LeadController extends Controller
             'follow_up_status' => $data['next_follow_up_date'] ? 'Pending' : 'Completed',
         ]);
 
-        return redirect()->route('admin.leads.follow-ups', $lead)->with('success', 'Follow-up added successfully.');
+        return redirect()->route('admin.leads.show', $lead)->with('success', 'Follow-up added successfully.');
     }
 
     private function leadRules(Request $request): array
