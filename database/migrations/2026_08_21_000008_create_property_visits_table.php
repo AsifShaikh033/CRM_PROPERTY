@@ -5,9 +5,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up(): void {
-        Schema::create('property_visits', function(Blueprint $table) {
+        Schema::create('property_visits', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('property_id')->constrained()->cascadeOnDelete(); $table->foreignId('lead_id')->nullable()->constrained()->nullOnDelete(); $table->date('visit_date'); $table->string('status')->default('scheduled'); $table->text('notes')->nullable();
+            $table->unsignedBigInteger('property_id');
+            $table->unsignedBigInteger('lead_id');
+            $table->unsignedBigInteger('agent_id')->nullable();
+            $table->date('visit_date');
+            $table->time('visit_time');
+            $table->string('status', 50)->default('Scheduled');
+            $table->text('visit_notes')->nullable();
             $table->timestamps();
         });
     }

@@ -5,8 +5,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class PropertyVisit extends Model
 {
-    protected $fillable = ['property_id', 'lead_id', 'visit_date', 'status', 'notes'];
-    protected $casts = ['visit_date'=>'datetime'];
+    protected $fillable = [
+        'property_id',
+        'lead_id',
+        'agent_id',
+        'visit_date',
+        'visit_time',
+        'status',
+        'visit_notes',
+    ];
+
+    protected $casts = [
+        'visit_date' => 'date',
+    ];
 
       public function property()
     {
@@ -17,5 +28,10 @@ class PropertyVisit extends Model
     public function lead()
     {
         return $this->belongsTo(Lead::class);
+    }
+
+    public function agent()
+    {
+        return $this->belongsTo(User::class, 'agent_id');
     }
 }
