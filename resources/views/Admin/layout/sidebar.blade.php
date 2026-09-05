@@ -90,6 +90,15 @@
                 </li>
              @endcan
 
+             @can('property-visits.view')
+             <li class="nav-item {{ Request::routeIs('admin.property-visits.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.property-visits.index') }}">
+                        <i class="fas fa-calendar-alt"></i>
+                        <p>Property Visits</p>
+                    </a>
+                </li>
+             @endcan
+
              @can('bookings.view')
              <li class="nav-item {{ Request::routeIs('admin.bookings.index') ? 'active' : '' }}">
                     <a href="{{ route('admin.bookings.index') }}">

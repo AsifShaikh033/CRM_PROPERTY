@@ -460,10 +460,12 @@ CREATE TABLE `property_units` (
 CREATE TABLE `property_visits` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `property_id` bigint(20) UNSIGNED NOT NULL,
-  `lead_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `lead_id` bigint(20) UNSIGNED NOT NULL,
+  `agent_id` bigint(20) UNSIGNED DEFAULT NULL,
   `visit_date` date NOT NULL,
-  `status` varchar(255) NOT NULL DEFAULT 'scheduled',
-  `notes` text DEFAULT NULL,
+  `visit_time` time NOT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'Scheduled',
+  `visit_notes` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -896,9 +898,7 @@ ALTER TABLE `property_units`
 -- Indexes for table `property_visits`
 --
 ALTER TABLE `property_visits`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `property_visits_property_id_foreign` (`property_id`),
-  ADD KEY `property_visits_lead_id_foreign` (`lead_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `rental_agreements`
@@ -1134,13 +1134,6 @@ ALTER TABLE `properties`
 ALTER TABLE `property_units`
   ADD CONSTRAINT `property_units_property_id_foreign` FOREIGN KEY (`property_id`) REFERENCES `properties` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `property_units_tenant_id_foreign` FOREIGN KEY (`tenant_id`) REFERENCES `tenants` (`id`) ON DELETE SET NULL;
-
---
--- Constraints for table `property_visits`
---
-ALTER TABLE `property_visits`
-  ADD CONSTRAINT `property_visits_lead_id_foreign` FOREIGN KEY (`lead_id`) REFERENCES `leads` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `property_visits_property_id_foreign` FOREIGN KEY (`property_id`) REFERENCES `properties` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `rental_agreements`

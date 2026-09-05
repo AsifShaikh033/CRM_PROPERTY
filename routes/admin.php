@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\PropertyTypeController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\LeadController;
+use App\Http\Controllers\Admin\PropertyVisitController;
 Route::prefix('admin')->group(function () {
 
     //AUTH
@@ -79,13 +80,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('property-types', PropertyTypeController::class)->except(['show']);
     Route::resource('bookings', BookingController::class);
     Route::resource('leads', LeadController::class);
-    Route::get('leads/{lead}/follow-ups', [LeadController::class, 'followUps'])->name('leads.follow-ups');
+    Route::resource('property-visits', PropertyVisitController::class)->parameters(['property-visits' => 'visit']);
     Route::get('leads/{lead}/follow-ups/create', [LeadController::class, 'createFollowUp'])->name('leads.follow-ups.create');
     Route::post('leads/{lead}/follow-ups', [LeadController::class, 'storeFollowUp'])->name('leads.follow-ups.store');
 });
-
-
-
 
 
 
