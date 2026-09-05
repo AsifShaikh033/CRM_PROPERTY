@@ -8,6 +8,7 @@ use App\Models\LeadFollowUp;
 use App\Models\Property;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Helpers\NotificationHelper;
 
 class LeadController extends Controller
 {
@@ -41,7 +42,11 @@ class LeadController extends Controller
     public function store(Request $request)
     {
         Lead::create($this->leadRules($request));
-
+            NotificationHelper::create(
+                'New Lead Added',
+                'lead_add',
+                'A new lead "' . $request->lead_name . '" has been added.'
+            );
         return redirect()
             ->route('admin.leads.index')
             ->with('success', 'Lead created successfully.');
@@ -64,6 +69,11 @@ class LeadController extends Controller
     public function update(Request $request, Lead $lead)
     {
         $lead->update($this->leadRules($request));
+        NotificationHelper::create(
+            'Lead Updated',
+            'lead_edit',
+            'Lead "' . $lead->lead_name . '" has been updated.'
+        );
 
         return redirect()
             ->route('admin.leads.index')

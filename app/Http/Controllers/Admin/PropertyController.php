@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Helpers\NotificationHelper;
 
 class PropertyController extends Controller
 {
@@ -61,6 +62,12 @@ class PropertyController extends Controller
 
         Property::create($data);
 
+NotificationHelper::create(
+    'New Property Added',
+    'property_add',
+    'A new property "' . $request->name . '" has been added.'
+);
+
         return redirect()->route('admin.properties.index')->with('success','Property created successfully.');
     }
 
@@ -106,6 +113,11 @@ class PropertyController extends Controller
         }
 
         $property->update($data);
+        NotificationHelper::create(
+            'Property Updated',
+            'property_edit',
+            'Property "' . $request->name . '" has been updated.'
+        );
 
         return redirect()->route('admin.properties.index')->with('success','Property updated successfully.');
     }

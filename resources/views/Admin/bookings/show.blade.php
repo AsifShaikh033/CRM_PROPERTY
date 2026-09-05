@@ -173,18 +173,15 @@
                                 <div class="form-group">
 
                                     <label>
-                                        Tenant / Customer
+                                        Lead 
                                     </label>
 
                                     <div class="form-control bg-light">
 
-                                        @if($item->tenant)
+                                        @if($item->lead_name)
 
-                                            {{ $item->tenant->name }}
+                                            {{ $item->lead_name }}
 
-                                        @elseif($item->tenant_id)
-
-                                            Tenant #{{ $item->tenant_id }}
 
                                         @else
 
@@ -205,12 +202,12 @@
                                 <div class="form-group">
 
                                     <label>
-                                        Tenant Phone
+                                        Lead Phone
                                     </label>
 
                                     <div class="form-control bg-light">
 
-                                        {{ $item->tenant?->phone ?? '-' }}
+                                        {{ $item->lead_phone ?? '-' }}
 
                                     </div>
 
@@ -225,12 +222,12 @@
                                 <div class="form-group">
 
                                     <label>
-                                        Tenant Email
+                                        Lead Email
                                     </label>
 
                                     <div class="form-control bg-light">
 
-                                        {{ $item->tenant?->email ?? '-' }}
+                                        {{ $item->lead_email ?? '-' }}
 
                                     </div>
 

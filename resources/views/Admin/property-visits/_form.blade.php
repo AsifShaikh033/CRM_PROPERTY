@@ -1,6 +1,7 @@
 @php
     $visit = $item ?? null;
     $statuses = ['Scheduled', 'Completed', 'Cancelled', 'Rescheduled', 'No Show', 'Pending'];
+    $customerStatuses = ['Interested', 'Not Interested', 'Pending'];
 @endphp
 
 <div class="row">
@@ -74,6 +75,17 @@
                 @endforeach
             </select>
             @error('status') <div class="invalid-feedback">{{ $message }}</div> @enderror
+        </div>
+    </div>
+        <div class="col-md-6">
+        <div class="form-group">
+            <label for="customer_status">Customer Status <span class="text-danger">*</span></label>
+            <select id="customer_status" name="customer_status" required class="form-select @error('customer_status') is-invalid @enderror">
+                @foreach ($customerStatuses as $status)
+                    <option value="{{ $status }}" @selected(old('customer_status', $visit?->customer_status ?? 'Pending') === $status)>{{ $status }}</option>
+                @endforeach
+            </select>
+            @error('customer_status') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
     </div>
 

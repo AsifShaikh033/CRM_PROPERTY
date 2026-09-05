@@ -119,29 +119,29 @@
 
                                     <div class="form-group">
 
-                                        <label for="tenant_id">
-                                            Tenant / Customer
+                                        <label for="lead_id">
+                                            Lead
                                         </label>
 
 
-                                        <select id="tenant_id"
-                                                name="tenant_id"
-                                                class="form-select @error('tenant_id') is-invalid @enderror">
+                                        <select id="lead_id"
+                                                name="lead_id"
+                                                class="form-select @error('lead_id') is-invalid @enderror">
 
                                             <option value="">
-                                                Select Tenant / Customer
+                                                Select Lead
                                             </option>
 
 
-                                            @foreach ($tenants ?? [] as $tenant)
+                                            @foreach ($leads ?? [] as $lead)
 
-                                                <option value="{{ $tenant->id }}"
-                                                    {{ old('tenant_id') == $tenant->id ? 'selected' : '' }}>
+                                                <option value="{{ $lead->lead_id }}"
+                                                    {{ old('lead_id') == $lead->lead->id ? 'selected' : '' }}>
 
-                                                    {{ $tenant->name }}
+                                                    {{ $lead->lead->lead_name }}
 
-                                                    @if ($tenant->phone)
-                                                        - {{ $tenant->phone }}
+                                                    @if ($lead->lead->phone)
+                                                        - {{ $lead->lead->phone }}
                                                     @endif
 
                                                 </option>
@@ -151,7 +151,7 @@
                                         </select>
 
 
-                                        @error('tenant_id')
+                                        @error('lead_id')
 
                                             <div class="invalid-feedback">
                                                 {{ $message }}

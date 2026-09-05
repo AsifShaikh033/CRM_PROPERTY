@@ -45,7 +45,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Property</th>
-                                        <th>Tenant</th>
+                                        <th>Lead</th>
                                         <th>Booking Date</th>
                                         <th>Amount</th>
                                         <th>Status</th>
@@ -84,16 +84,16 @@
                                             </td>
 
                                             <td>
-                                                @if($item->tenant)
+                                                @if($item->lead_name)
 
                                                     <strong>
-                                                        {{ $item->tenant->name }}
+                                                        {{ $item->lead_name }}
                                                     </strong>
 
-                                                    @if($item->tenant->phone)
+                                                    @if($item->lead_phone)
                                                         <br>
                                                         <small class="text-muted">
-                                                            {{ $item->tenant->phone }}
+                                                            {{ $item->lead_phone }}
                                                         </small>
                                                     @endif
 
