@@ -48,7 +48,7 @@ $badgeClasses = ['Scheduled' => 'bg-primary', 'Completed' => 'bg-success', 'Canc
                     </div>
                 </form>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover">
+                    <table id="add-row" class="table table-striped table-hover">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -58,6 +58,7 @@ $badgeClasses = ['Scheduled' => 'bg-primary', 'Completed' => 'bg-success', 'Canc
                                 <th>Visit Date</th>
                                 <th>Visit Time</th>
                                 <th>Status</th>
+                                <th>Customer Status</th>
                                 <th>Notes</th>
                                 <th>Actions</th>
                             </tr>
@@ -79,6 +80,9 @@ $badgeClasses = ['Scheduled' => 'bg-primary', 'Completed' => 'bg-success', 'Canc
                                 </td>
                                 <td><span
                                         class="badge {{ $badgeClasses[$item->status] ?? 'bg-secondary' }}">{{ $item->status }}</span>
+                                </td>
+                                 <td><span
+                                        class="badge {{ $badgeClasses[$item->customer_status] ?? 'bg-secondary' }}">{{ $item->customer_status }}</span>
                                 </td>
                                 <td title="{{ $item->visit_notes }}">
                                     {{ \Illuminate\Support\Str::limit($item->visit_notes, 45) ?: '—' }}</td>

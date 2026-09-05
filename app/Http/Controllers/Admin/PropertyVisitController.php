@@ -9,10 +9,12 @@ use App\Models\Lead;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Helpers\NotificationHelper;
 
 class PropertyVisitController extends Controller
 {
     private const STATUSES = ['Scheduled', 'Completed', 'Cancelled', 'Rescheduled', 'No Show', 'Pending'];
+    private const CUSTOMER_STATUSES = ['Interested', 'Not Interested', 'Pending'];
 
     public function index(Request $request)
     {
@@ -21,6 +23,7 @@ class PropertyVisitController extends Controller
             ->when($request->filled('lead_id'), fn ($query) => $query->where('lead_id', $request->integer('lead_id')))
             ->when($request->filled('agent_id'), fn ($query) => $query->where('agent_id', $request->integer('agent_id')))
             ->when($request->filled('status'), fn ($query) => $query->where('status', $request->input('status')))
+            ->when($request->filled('customer_status'), fn ($query) => $query->where('customer_status', $request->input('customer_status')))
             ->when($request->filled('visit_date'), fn ($query) => $query->whereDate('visit_date', $request->input('visit_date')))
             ->latest()
             ->paginate(15);
@@ -31,6 +34,7 @@ class PropertyVisitController extends Controller
             'leads' => Lead::orderBy('lead_name')->get(['id', 'lead_name', 'phone']),
             'agents' => $this->agents()->get(['id', 'name', 'mob_number']),
             'statuses' => self::STATUSES,
+            'customerStatuses' => self::CUSTOMER_STATUSES,
         ]);
     }
 
@@ -59,6 +63,14 @@ class PropertyVisitController extends Controller
         $data = $this->validatedData($request);
 
         PropertyVisit::create($data);
+        $propertyVisit = PropertyVisit::latest()->first();
+        NotificationHelper::create(
+            'New Property Visit',
+            'property_visit_add',
+            'A new visit has been scheduled for property "' .
+                $propertyVisit->property->name .
+                '".'
+        );
 
         return redirect()
             ->route('admin.property-visits.index')
@@ -103,6 +115,11 @@ class PropertyVisitController extends Controller
         $data = $this->validatedData($request);
 
         $visit->update($data);
+        NotificationHelper::create(
+            'Property Visit Updated',
+            'property_visit_edit',
+            'A property visit has been updated.'
+        );
 
         return redirect()
             ->route('admin.property-visits.index')
@@ -128,6 +145,7 @@ class PropertyVisitController extends Controller
             'visit_date' => ['required', 'date'],
             'visit_time' => ['required', 'date_format:H:i'],
             'status' => ['required', Rule::in(self::STATUSES)],
+            'customer_status' => ['required', Rule::in(self::CUSTOMER_STATUSES)],
             'visit_notes' => ['nullable', 'string'],
         ]);
     }

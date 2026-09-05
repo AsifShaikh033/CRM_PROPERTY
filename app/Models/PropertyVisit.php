@@ -12,6 +12,7 @@ class PropertyVisit extends Model
         'visit_date',
         'visit_time',
         'status',
+        'customer_status',
         'visit_notes',
     ];
 
